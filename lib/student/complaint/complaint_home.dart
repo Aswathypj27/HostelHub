@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../core/complaint_theme.dart';
 import '../student_data.dart';
 
 /// ===============================
@@ -42,13 +43,13 @@ class ComplaintHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F7F5),
+      backgroundColor: kComplaintBg,
       body: Column(
         children: [
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color(0xFF2D6A4F), Color(0xFF40916C)],
+                colors: [kComplaintBlue, kComplaintBlueLight],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -115,7 +116,7 @@ class ComplaintHome extends StatelessWidget {
                     icon: Icons.edit_note_rounded,
                     title: 'Raise Complaint',
                     subtitle: 'Submit a new room, mess or general complaint',
-                    color: const Color(0xFF2D6A4F),
+                    color: kComplaintBlue,
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(builder: (_) => const ComplaintForm()),
@@ -126,7 +127,7 @@ class ComplaintHome extends StatelessWidget {
                     icon: Icons.manage_search_rounded,
                     title: 'My Complaints',
                     subtitle: 'Track the status of your submitted complaints',
-                    color: const Color(0xFF1565C0),
+                    color: kComplaintBlue,
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(builder: (_) => const MyComplaints()),
@@ -315,7 +316,7 @@ class _ComplaintFormState extends State<ComplaintForm> {
           ),
           title: Row(
             children: [
-              const Icon(Icons.check_circle, color: Color(0xFF2D6A4F)),
+              const Icon(Icons.check_circle, color: kComplaintBlue),
               const SizedBox(width: 8),
               const Text(
                 'Submitted!',
@@ -331,7 +332,7 @@ class _ComplaintFormState extends State<ComplaintForm> {
           actions: [
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF2D6A4F),
+                backgroundColor: kComplaintBlue,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -362,14 +363,14 @@ class _ComplaintFormState extends State<ComplaintForm> {
   Widget build(BuildContext context) {
     final isPrivate = _category == 'Private Complaint';
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F7F5),
+      backgroundColor: kComplaintBg,
       body: Column(
         children: [
           // Header
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color(0xFF2D6A4F), Color(0xFF40916C)],
+                colors: [kComplaintBlue, kComplaintBlueLight],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -445,7 +446,7 @@ class _ComplaintFormState extends State<ComplaintForm> {
                             isExpanded: true,
                             icon: const Icon(
                               Icons.keyboard_arrow_down,
-                              color: Color(0xFF40916C),
+                              color: kComplaintBlueLight,
                             ),
                             style: const TextStyle(
                               color: Color(0xFF1B1B1B),
@@ -514,10 +515,10 @@ class _ComplaintFormState extends State<ComplaintForm> {
                     Container(
                       padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFE8F5E9),
+                        color: kComplaintBlueTint,
                         borderRadius: BorderRadius.circular(14),
                         border: Border.all(
-                          color: const Color(0xFF2D6A4F).withOpacity(0.2),
+                          color: kComplaintBlue.withOpacity(0.2),
                         ),
                       ),
                       child: Column(
@@ -528,7 +529,7 @@ class _ComplaintFormState extends State<ComplaintForm> {
                               Icon(
                                 Icons.alt_route,
                                 size: 16,
-                                color: Color(0xFF2D6A4F),
+                                color: kComplaintBlue,
                               ),
                               SizedBox(width: 6),
                               Text(
@@ -536,7 +537,7 @@ class _ComplaintFormState extends State<ComplaintForm> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w800,
                                   fontSize: 13,
-                                  color: Color(0xFF2D6A4F),
+                                  color: kComplaintBlue,
                                 ),
                               ),
                             ],
@@ -546,7 +547,7 @@ class _ComplaintFormState extends State<ComplaintForm> {
                             kComplaintChain[_category]!.join('  →  '),
                             style: const TextStyle(
                               fontSize: 12,
-                              color: Color(0xFF2D6A4F),
+                              color: kComplaintBlue,
                             ),
                           ),
                         ],
@@ -581,7 +582,7 @@ class _ComplaintFormState extends State<ComplaintForm> {
                         const Icon(
                           Icons.event_note,
                           size: 18,
-                          color: Color(0xFF2D6A4F),
+                          color: kComplaintBlue,
                         ),
                         const SizedBox(width: 10),
                         Column(
@@ -650,7 +651,7 @@ class _ComplaintFormState extends State<ComplaintForm> {
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF2D6A4F),
+                        backgroundColor: kComplaintBlue,
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(
@@ -721,7 +722,7 @@ class _ReadOnlyRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(icon, size: 16, color: const Color(0xFF2D6A4F)),
+        Icon(icon, size: 16, color: kComplaintBlue),
         const SizedBox(width: 10),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -758,13 +759,13 @@ class MyComplaints extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F7F5),
+      backgroundColor: kComplaintBg,
       body: Column(
         children: [
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color(0xFF2D6A4F), Color(0xFF40916C)],
+                colors: [kComplaintBlue, kComplaintBlueLight],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -830,7 +831,7 @@ class MyComplaints extends StatelessWidget {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
-                    child: CircularProgressIndicator(color: Color(0xFF2D6A4F)),
+                    child: CircularProgressIndicator(color: kComplaintBlue),
                   );
                 }
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
@@ -906,7 +907,7 @@ class _ComplaintCard extends StatelessWidget {
   Color _statusDot(String s) {
     switch (s) {
       case 'accepted':
-        return const Color(0xFF1565C0);
+        return kComplaintBlue;
       case 'resolved':
         return const Color(0xFF28A745);
       case 'rejected':
@@ -945,11 +946,11 @@ class _ComplaintCard extends StatelessWidget {
   Color _categoryColor(String c) {
     switch (c) {
       case 'Room Complaint':
-        return const Color(0xFF1565C0);
+        return kComplaintBlue;
       case 'Mess Complaint':
         return const Color(0xFFE65100);
       case 'General Complaint':
-        return const Color(0xFF2D6A4F);
+        return kComplaintBlue;
       case 'Private Complaint':
         return Colors.purple;
       default:
@@ -1084,7 +1085,7 @@ class _ComplaintCard extends StatelessWidget {
                         const Icon(
                           Icons.event,
                           size: 13,
-                          color: Color(0xFF2D6A4F),
+                          color: kComplaintBlue,
                         ),
                         const SizedBox(width: 4),
                         Text(
@@ -1094,7 +1095,7 @@ class _ComplaintCard extends StatelessWidget {
                           ].join('  ·  '),
                           style: const TextStyle(
                             fontSize: 12,
-                            color: Color(0xFF2D6A4F),
+                            color: kComplaintBlue,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -1187,14 +1188,14 @@ class _ComplaintCard extends StatelessWidget {
                     'View Details',
                     style: TextStyle(
                       fontSize: 13,
-                      color: Color(0xFF2D6A4F),
+                      color: kComplaintBlue,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                   Icon(
                     Icons.arrow_forward_ios,
                     size: 13,
-                    color: Color(0xFF2D6A4F),
+                    color: kComplaintBlue,
                   ),
                 ],
               ),
@@ -1253,7 +1254,7 @@ class _ComplaintTrackingPageState extends State<ComplaintTrackingPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Forwarded to ${chain[nextIndex]}"),
-          backgroundColor: const Color(0xFF2D6A4F),
+          backgroundColor: kComplaintBlue,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
@@ -1282,7 +1283,7 @@ class _ComplaintTrackingPageState extends State<ComplaintTrackingPage> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: const Row(
           children: [
-            Icon(Icons.forward, color: Color(0xFF2D6A4F)),
+            Icon(Icons.forward, color: kComplaintBlue),
             SizedBox(width: 8),
             Text(
               'Forward Complaint',
@@ -1301,7 +1302,7 @@ class _ComplaintTrackingPageState extends State<ComplaintTrackingPage> {
           ),
           ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF2D6A4F),
+              backgroundColor: kComplaintBlue,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -1339,7 +1340,7 @@ class _ComplaintTrackingPageState extends State<ComplaintTrackingPage> {
   Color _statusDot(String s) {
     switch (s) {
       case 'accepted':
-        return const Color(0xFF1565C0);
+        return kComplaintBlue;
       case 'resolved':
         return const Color(0xFF28A745);
       case 'rejected':
@@ -1391,7 +1392,7 @@ class _ComplaintTrackingPageState extends State<ComplaintTrackingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F7F5),
+      backgroundColor: kComplaintBg,
       body: StreamBuilder<DocumentSnapshot>(
         stream: FirebaseFirestore.instance
             .collection('complaints')
@@ -1400,7 +1401,7 @@ class _ComplaintTrackingPageState extends State<ComplaintTrackingPage> {
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const Center(
-              child: CircularProgressIndicator(color: Color(0xFF2D6A4F)),
+              child: CircularProgressIndicator(color: kComplaintBlue),
             );
           }
 
@@ -1429,7 +1430,7 @@ class _ComplaintTrackingPageState extends State<ComplaintTrackingPage> {
                 child: Container(
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [Color(0xFF2D6A4F), Color(0xFF40916C)],
+                      colors: [kComplaintBlue, kComplaintBlueLight],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
@@ -1664,11 +1665,11 @@ class _ComplaintTrackingPageState extends State<ComplaintTrackingPage> {
                                 vertical: 10,
                               ),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFE8F5E9),
+                                color: kComplaintBlueTint,
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
                                   color: const Color(
-                                    0xFF2D6A4F,
+                                    0xFF1565C0,
                                   ).withOpacity(0.25),
                                 ),
                               ),
@@ -1677,7 +1678,7 @@ class _ComplaintTrackingPageState extends State<ComplaintTrackingPage> {
                                   const Icon(
                                     Icons.event_note,
                                     size: 16,
-                                    color: Color(0xFF2D6A4F),
+                                    color: kComplaintBlue,
                                   ),
                                   const SizedBox(width: 8),
                                   Column(
@@ -1688,7 +1689,7 @@ class _ComplaintTrackingPageState extends State<ComplaintTrackingPage> {
                                         'Incident Date & Time',
                                         style: TextStyle(
                                           fontSize: 10,
-                                          color: Color(0xFF2D6A4F),
+                                          color: kComplaintBlue,
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
@@ -1822,10 +1823,10 @@ class _ComplaintTrackingPageState extends State<ComplaintTrackingPage> {
                       Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE8F5E9),
+                          color: kComplaintBlueTint,
                           borderRadius: BorderRadius.circular(18),
                           border: Border.all(
-                            color: const Color(0xFF2D6A4F).withOpacity(0.25),
+                            color: kComplaintBlue.withOpacity(0.25),
                           ),
                         ),
                         child: Column(
@@ -1844,7 +1845,7 @@ class _ComplaintTrackingPageState extends State<ComplaintTrackingPage> {
                               'You can escalate this complaint to ${chain[currentIndex + 1]}.',
                               style: const TextStyle(
                                 fontSize: 13,
-                                color: Color(0xFF2D6A4F),
+                                color: kComplaintBlue,
                               ),
                             ),
                             const SizedBox(height: 12),
@@ -1852,7 +1853,7 @@ class _ComplaintTrackingPageState extends State<ComplaintTrackingPage> {
                               width: double.infinity,
                               child: ElevatedButton.icon(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFF2D6A4F),
+                                  backgroundColor: kComplaintBlue,
                                   foregroundColor: Colors.white,
                                   padding: const EdgeInsets.symmetric(
                                     vertical: 12,
@@ -1962,7 +1963,7 @@ class _TrackStep extends StatelessWidget {
       if (isCurrent) {
         if (status == 'resolved') return const Color(0xFF28A745);
         if (status == 'rejected') return const Color(0xFFDC3545);
-        if (status == 'accepted') return const Color(0xFF1565C0);
+        if (status == 'accepted') return kComplaintBlue;
         return const Color(0xFFFFC107);
       }
       return Colors.grey.shade300;
@@ -2072,14 +2073,14 @@ class _HistoryTile extends StatelessWidget {
       case 'forwarded':
         return const Color(0xFFEDE7F6);
       default:
-        return const Color(0xFFF4F7F5);
+        return kComplaintBg;
     }
   }
 
   Color _ic(String a) {
     switch (a) {
       case 'accepted':
-        return const Color(0xFF1565C0);
+        return kComplaintBlue;
       case 'resolved':
         return const Color(0xFF28A745);
       case 'rejected':
@@ -2189,3 +2190,5 @@ class _HistoryTile extends StatelessWidget {
     );
   }
 }
+
+

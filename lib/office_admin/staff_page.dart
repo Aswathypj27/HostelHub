@@ -30,6 +30,12 @@ class StaffPage extends StatelessWidget {
               Icons.admin_panel_settings,
               const AddStaffPage(role: "warden"),
             ),
+            _option(
+              context,
+              "Add Mess Secretary",
+              Icons.restaurant,
+              const AddStaffPage(role: "messsec"),
+            ),
             const SizedBox(height: 16),
             const Divider(),
             const Expanded(child: _StaffList()),

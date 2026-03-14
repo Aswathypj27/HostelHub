@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../core/complaint_theme.dart';
 
 class RtComplaintListPage extends StatefulWidget {
   const RtComplaintListPage({super.key});
@@ -27,11 +28,11 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
   Color _categoryColor(String category) {
     switch (category) {
       case 'Room Complaint':
-        return const Color(0xFF1565C0);
+        return kComplaintBlue;
       case 'Mess Complaint':
         return const Color(0xFFE65100);
       case 'General Complaint':
-        return const Color(0xFF2D6A4F);
+        return kComplaintBlue;
       default:
         return Colors.grey;
     }
@@ -112,7 +113,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
       builder: (context, child) => Theme(
         data: Theme.of(context).copyWith(
           colorScheme: const ColorScheme.light(
-            primary: const Color(0xFF1565C0),
+            primary: kComplaintBlue,
             onPrimary: Colors.white,
             onSurface: const Color(0xFF1B1B1B),
           ),
@@ -156,7 +157,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           value: _categoryFilter,
-          icon: const Icon(Icons.keyboard_arrow_down, color: Color(0xFF1565C0)),
+          icon: const Icon(Icons.keyboard_arrow_down, color: kComplaintBlue),
           style: const TextStyle(
             color: Color(0xFF1B1B1B),
             fontSize: 13,
@@ -178,7 +179,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: const Row(
           children: [
-            Icon(Icons.forward_to_inbox, color: Color(0xFF2D6A4F)),
+            Icon(Icons.forward_to_inbox, color: kComplaintBlue),
             SizedBox(width: 8),
             Text(
               'Forward to Warden',
@@ -194,7 +195,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: const Color(0xFFF4F7F5),
+                color: kComplaintBg,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
@@ -227,17 +228,17 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: const Color(0xFFE8F5E9),
+                color: kComplaintBlueTint,
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: const Color(0xFF2D6A4F).withOpacity(0.3),
+                  color: kComplaintBlue.withOpacity(0.3),
                 ),
               ),
               child: const Row(
                 children: [
                   Icon(
                     Icons.admin_panel_settings,
-                    color: Color(0xFF2D6A4F),
+                    color: kComplaintBlue,
                     size: 20,
                   ),
                   SizedBox(width: 10),
@@ -248,7 +249,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
                         'Forwarding To',
                         style: TextStyle(
                           fontSize: 11,
-                          color: Color(0xFF2D6A4F),
+                          color: kComplaintBlue,
                         ),
                       ),
                       Text(
@@ -306,7 +307,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
                         ),
                       ],
                     ),
-                    backgroundColor: const Color(0xFF2D6A4F),
+                    backgroundColor: kComplaintBlue,
                     behavior: SnackBarBehavior.floating,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -327,7 +328,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
               style: TextStyle(fontWeight: FontWeight.w700),
             ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF2D6A4F),
+              backgroundColor: kComplaintBlue,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -504,7 +505,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F7F5),
+      backgroundColor: kComplaintBg,
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('complaints').snapshots(),
         builder: (context, snapshot) {
@@ -534,7 +535,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
               Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Color(0xFF1565C0), Color(0xFF1976D2)],
+                    colors: [kComplaintBlue, Color(0xFF1976D2)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -606,7 +607,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
                         _statBox(
                           'Forwarded',
                           forwarded,
-                          const Color(0xFF2D6A4F).withOpacity(0.8),
+                          kComplaintBlue.withOpacity(0.8),
                         ),
                         const SizedBox(width: 8),
                         _statBox(
@@ -645,7 +646,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
                           children: [
                             const Icon(
                               Icons.search,
-                              color: Color(0xFF1565C0),
+                              color: kComplaintBlue,
                               size: 20,
                             ),
                             const SizedBox(width: 10),
@@ -683,12 +684,12 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
                                 decoration: BoxDecoration(
                                   color: _selectedDate == null
                                       ? Colors.white
-                                      : const Color(0xFFE8F5E9),
+                                      : kComplaintBlueTint,
                                   borderRadius: BorderRadius.circular(14),
                                   border: Border.all(
                                     color: _selectedDate == null
                                         ? Colors.transparent
-                                        : const Color(0xFF1565C0),
+                                        : kComplaintBlue,
                                     width: 1.5,
                                   ),
                                   boxShadow: [
@@ -703,7 +704,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
                                     Icon(
                                       Icons.calendar_month,
                                       size: 18,
-                                      color: const Color(0xFF1565C0),
+                                      color: kComplaintBlue,
                                     ),
                                     const SizedBox(width: 8),
                                     Expanded(
@@ -773,7 +774,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
                                 ),
                                 decoration: BoxDecoration(
                                   color: active
-                                      ? const Color(0xFF1565C0)
+                                      ? kComplaintBlue
                                       : Colors.white,
                                   borderRadius: BorderRadius.circular(20),
                                   boxShadow: [
@@ -813,7 +814,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
                             vertical: 8,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFE8F5E9),
+                            color: kComplaintBlueTint,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Row(
@@ -821,7 +822,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
                               const Icon(
                                 Icons.filter_list,
                                 size: 14,
-                                color: Color(0xFF2D6A4F),
+                                color: kComplaintBlue,
                               ),
                               const SizedBox(width: 6),
                               Expanded(
@@ -829,7 +830,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
                                   'Showing complaints for: ${_formatFilterDate(_selectedDate!)}',
                                   style: const TextStyle(
                                     fontSize: 12,
-                                    color: Color(0xFF2D6A4F),
+                                    color: kComplaintBlue,
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
@@ -844,7 +845,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
                             snapshot.connectionState == ConnectionState.waiting
                             ? const Center(
                                 child: CircularProgressIndicator(
-                                  color: Color(0xFF1565C0),
+                                  color: kComplaintBlue,
                                 ),
                               )
                             : () {
@@ -993,7 +994,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
                                                               )
                                                             : isForwarded
                                                             ? const Color(
-                                                                0xFFE8F5E9,
+                                                                0xFFE8F0FE,
                                                               )
                                                             : const Color(
                                                                 0xFFFFF3CD,
@@ -1017,7 +1018,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
                                                                     )
                                                                   : isForwarded
                                                                   ? const Color(
-                                                                      0xFF2D6A4F,
+                                                                      0xFF1565C0,
                                                                     )
                                                                   : const Color(
                                                                       0xFFFFC107,
@@ -1114,7 +1115,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
                                                         Icons.forward_to_inbox,
                                                         size: 13,
                                                         color: Color(
-                                                          0xFF2D6A4F,
+                                                          0xFF1565C0,
                                                         ),
                                                       ),
                                                       SizedBox(width: 4),
@@ -1123,7 +1124,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
                                                         style: TextStyle(
                                                           fontSize: 12,
                                                           color: Color(
-                                                            0xFF2D6A4F,
+                                                            0xFF1565C0,
                                                           ),
                                                           fontWeight:
                                                               FontWeight.w700,
@@ -1200,7 +1201,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
                                                             ),
                                                         decoration: BoxDecoration(
                                                           color: const Color(
-                                                            0xFFE8F5E9,
+                                                            0xFFE8F0FE,
                                                           ),
                                                           borderRadius:
                                                               BorderRadius.circular(
@@ -1217,7 +1218,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
                                                                   .forward_to_inbox,
                                                               size: 15,
                                                               color: Color(
-                                                                0xFF2D6A4F,
+                                                                0xFF1565C0,
                                                               ),
                                                             ),
                                                             SizedBox(width: 6),
@@ -1225,7 +1226,7 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
                                                               'Forward to Warden',
                                                               style: TextStyle(
                                                                 color: Color(
-                                                                  0xFF2D6A4F,
+                                                                  0xFF1565C0,
                                                                 ),
                                                                 fontWeight:
                                                                     FontWeight
@@ -1340,3 +1341,6 @@ class _RtComplaintListPageState extends State<RtComplaintListPage> {
     );
   }
 }
+
+
+

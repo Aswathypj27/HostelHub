@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../core/complaint_theme.dart';
 
 class OfficeAdminComplaintPage extends StatefulWidget {
   const OfficeAdminComplaintPage({super.key});
@@ -34,11 +35,11 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
   Color _categoryColor(String category) {
     switch (category) {
       case 'Room Complaint':
-        return const Color(0xFF1565C0);
+        return kComplaintBlue;
       case 'Mess Complaint':
         return const Color(0xFFE65100);
       case 'General Complaint':
-        return const Color(0xFF2D6A4F);
+        return kComplaintBlue;
       default:
         return Colors.grey;
     }
@@ -132,7 +133,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
       builder: (context, child) => Theme(
         data: Theme.of(context).copyWith(
           colorScheme: const ColorScheme.light(
-            primary: Color(0xFF2D6A4F),
+            primary: kComplaintBlue,
             onPrimary: Colors.white,
             onSurface: Color(0xFF1B1B1B),
           ),
@@ -175,7 +176,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           value: _categoryFilter,
-          icon: const Icon(Icons.keyboard_arrow_down, color: Color(0xFF40916C)),
+          icon: const Icon(Icons.keyboard_arrow_down, color: kComplaintBlueLight),
           style: const TextStyle(
             color: Color(0xFF1B1B1B),
             fontSize: 13,
@@ -199,7 +200,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: const Row(
           children: [
-            Icon(Icons.thumb_up_alt_outlined, color: Color(0xFF1565C0)),
+            Icon(Icons.thumb_up_alt_outlined, color: kComplaintBlue),
             SizedBox(width: 8),
             Text(
               'Accept Complaint',
@@ -270,7 +271,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: const BorderSide(
-                    color: Color(0xFF1565C0),
+                    color: kComplaintBlue,
                     width: 2,
                   ),
                 ),
@@ -327,7 +328,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
                         ),
                       ],
                     ),
-                    backgroundColor: const Color(0xFF1565C0),
+                    backgroundColor: kComplaintBlue,
                     behavior: SnackBarBehavior.floating,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -348,7 +349,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
               style: TextStyle(fontWeight: FontWeight.w700),
             ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF1565C0),
+              backgroundColor: kComplaintBlue,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -368,7 +369,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: const Row(
           children: [
-            Icon(Icons.check_circle_outline, color: Color(0xFF2D6A4F)),
+            Icon(Icons.check_circle_outline, color: kComplaintBlue),
             SizedBox(width: 8),
             Text(
               'Resolve Complaint',
@@ -384,7 +385,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: const Color(0xFFF4F7F5),
+                color: kComplaintBg,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
@@ -416,17 +417,17 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: const Color(0xFFE8F5E9),
+                color: kComplaintBlueTint,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: const Row(
                 children: [
-                  Icon(Icons.info_outline, size: 14, color: Color(0xFF2D6A4F)),
+                  Icon(Icons.info_outline, size: 14, color: kComplaintBlue),
                   SizedBox(width: 6),
                   Expanded(
                     child: Text(
                       'Press this only after the issue has been physically fixed.',
-                      style: TextStyle(fontSize: 12, color: Color(0xFF2D6A4F)),
+                      style: TextStyle(fontSize: 12, color: kComplaintBlue),
                     ),
                   ),
                 ],
@@ -477,7 +478,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
                         ),
                       ],
                     ),
-                    backgroundColor: const Color(0xFF2D6A4F),
+                    backgroundColor: kComplaintBlue,
                     behavior: SnackBarBehavior.floating,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -498,7 +499,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
               style: TextStyle(fontWeight: FontWeight.w700),
             ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF2D6A4F),
+              backgroundColor: kComplaintBlue,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -728,7 +729,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F7F5),
+      backgroundColor: kComplaintBg,
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('complaints').snapshots(),
         builder: (context, snapshot) {
@@ -765,7 +766,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
               Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Color(0xFF2D6A4F), Color(0xFF40916C)],
+                    colors: [kComplaintBlue, kComplaintBlueLight],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -840,13 +841,13 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
                           _statBox(
                             'Accepted',
                             accepted,
-                            const Color(0xFF1565C0).withOpacity(0.7),
+                            kComplaintBlue.withOpacity(0.7),
                           ),
                           const SizedBox(width: 8),
                           _statBox(
                             'Resolved',
                             resolved,
-                            const Color(0xFF28A745).withOpacity(0.6),
+                            const Color(0xFF1565C0).withOpacity(0.6),
                           ),
                           const SizedBox(width: 8),
                           _statBox(
@@ -887,7 +888,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
                           children: [
                             const Icon(
                               Icons.search,
-                              color: Color(0xFF40916C),
+                              color: kComplaintBlueLight,
                               size: 20,
                             ),
                             const SizedBox(width: 10),
@@ -925,12 +926,12 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
                                 decoration: BoxDecoration(
                                   color: _selectedDate == null
                                       ? Colors.white
-                                      : const Color(0xFFE8F5E9),
+                                      : kComplaintBlueTint,
                                   borderRadius: BorderRadius.circular(14),
                                   border: Border.all(
                                     color: _selectedDate == null
                                         ? Colors.transparent
-                                        : const Color(0xFF2D6A4F),
+                                        : kComplaintBlue,
                                     width: 1.5,
                                   ),
                                   boxShadow: [
@@ -945,7 +946,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
                                     const Icon(
                                       Icons.calendar_month,
                                       size: 18,
-                                      color: Color(0xFF2D6A4F),
+                                      color: kComplaintBlue,
                                     ),
                                     const SizedBox(width: 8),
                                     Expanded(
@@ -1015,14 +1016,14 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
                                 ),
                                 decoration: BoxDecoration(
                                   color: active
-                                      ? const Color(0xFF2D6A4F)
+                                      ? kComplaintBlue
                                       : Colors.white,
                                   borderRadius: BorderRadius.circular(20),
                                   boxShadow: [
                                     BoxShadow(
                                       color: active
                                           ? const Color(
-                                              0xFF2D6A4F,
+                                              0xFF1565C0,
                                             ).withOpacity(0.35)
                                           : Colors.black.withOpacity(0.07),
                                       blurRadius: active ? 10 : 6,
@@ -1055,7 +1056,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
                             vertical: 8,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFE8F5E9),
+                            color: kComplaintBlueTint,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Row(
@@ -1063,7 +1064,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
                               const Icon(
                                 Icons.filter_list,
                                 size: 14,
-                                color: Color(0xFF2D6A4F),
+                                color: kComplaintBlue,
                               ),
                               const SizedBox(width: 6),
                               Expanded(
@@ -1071,7 +1072,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
                                   'Showing complaints for: ${_formatFilterDate(_selectedDate!)}',
                                   style: const TextStyle(
                                     fontSize: 12,
-                                    color: Color(0xFF2D6A4F),
+                                    color: kComplaintBlue,
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
@@ -1086,7 +1087,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
                             snapshot.connectionState == ConnectionState.waiting
                             ? const Center(
                                 child: CircularProgressIndicator(
-                                  color: Color(0xFF2D6A4F),
+                                  color: kComplaintBlue,
                                 ),
                               )
                             : () {
@@ -1254,7 +1255,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
                                                               )
                                                             : isResolved
                                                             ? const Color(
-                                                                0xFFD4EDDA,
+                                                                0xFFE8F0FE,
                                                               )
                                                             : isAccepted
                                                             ? const Color(
@@ -1282,7 +1283,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
                                                                     )
                                                                   : isResolved
                                                                   ? const Color(
-                                                                      0xFF28A745,
+                                                                      0xFF1565C0,
                                                                     )
                                                                   : isAccepted
                                                                   ? const Color(
@@ -1482,7 +1483,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
                                                         Icons.check_circle,
                                                         size: 13,
                                                         color: Color(
-                                                          0xFF28A745,
+                                                          0xFF1565C0,
                                                         ),
                                                       ),
                                                       SizedBox(width: 4),
@@ -1491,7 +1492,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
                                                         style: TextStyle(
                                                           fontSize: 12,
                                                           color: Color(
-                                                            0xFF28A745,
+                                                            0xFF1565C0,
                                                           ),
                                                           fontWeight:
                                                               FontWeight.w700,
@@ -1595,11 +1596,11 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
                                                                 .check_circle_outline,
                                                             bgColor:
                                                                 const Color(
-                                                                  0xFFD4EDDA,
+                                                                  0xFFE8F0FE,
                                                                 ),
                                                             textColor:
                                                                 const Color(
-                                                                  0xFF28A745,
+                                                                  0xFF1565C0,
                                                                 ),
                                                             done: false,
                                                             isThis: false,
@@ -1646,10 +1647,10 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
                                                         icon: Icons
                                                             .check_circle_outline,
                                                         bgColor: const Color(
-                                                          0xFFD4EDDA,
+                                                          0xFFE8F0FE,
                                                         ),
                                                         textColor: const Color(
-                                                          0xFF28A745,
+                                                          0xFF1565C0,
                                                         ),
                                                         done: false,
                                                         isThis: false,
@@ -1690,7 +1691,7 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
                                                         icon:
                                                             Icons.check_circle,
                                                         bgColor: const Color(
-                                                          0xFF28A745,
+                                                          0xFF1565C0,
                                                         ),
                                                         textColor: Colors.white,
                                                         done: true,
@@ -1766,3 +1767,6 @@ class _OfficeAdminComplaintPageState extends State<OfficeAdminComplaintPage> {
     );
   }
 }
+
+
+

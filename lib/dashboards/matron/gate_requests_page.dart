@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../../core/complaint_theme.dart';
 import '../../services/notification_service.dart';
 
 enum GateStatus { pending, approved, rejected, forwarded }
@@ -41,25 +43,105 @@ class _GateRequestsPageState extends State<GateRequestsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Gate Requests"),
-        backgroundColor: const Color(0xFF3A6B52),
-      ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(12),
-        itemCount: requests.length,
-        itemBuilder: (_, i) {
-          final r = requests[i];
-
-          return Card(
-            child: ListTile(
-              title: Text("${r.name} (Room ${r.room})"),
-              subtitle: Text(r.reason),
-              trailing: _statusText(r.status),
-              onTap: () => _openDetails(r),
+      backgroundColor: kComplaintBg,
+      body: Column(
+        children: [
+          _header(context),
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(12),
+              itemCount: requests.length,
+              itemBuilder: (_, i) {
+                final r = requests[i];
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: kComplaintBorder, width: 1.2),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color(0x141565C0),
+                        blurRadius: 10,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: ListTile(
+                    title: Text(
+                      "${r.name} (Room ${r.room})",
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w700,
+                        color: kComplaintText,
+                      ),
+                    ),
+                    subtitle: Text(
+                      r.reason,
+                      style: const TextStyle(color: kComplaintMuted),
+                    ),
+                    trailing: _statusText(r.status),
+                    onTap: () => _openDetails(r),
+                  ),
+                );
+              },
             ),
-          );
-        },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _header(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(20, 18, 20, 22),
+      decoration: const BoxDecoration(
+        gradient: kComplaintHeaderGradient,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(28),
+          bottomRight: Radius.circular(28),
+        ),
+      ),
+      child: SafeArea(
+        bottom: false,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.18),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Icon(
+                  Icons.arrow_back_rounded,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              "Gate Requests",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              "${requests.length} request(s)",
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.75),
+                fontSize: 13,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -70,7 +152,7 @@ class _GateRequestsPageState extends State<GateRequestsPage> {
 
     switch (s) {
       case GateStatus.approved:
-        c = Colors.green;
+        c = kComplaintBlue;
         t = "Approved";
         break;
       case GateStatus.rejected:
@@ -78,7 +160,7 @@ class _GateRequestsPageState extends State<GateRequestsPage> {
         t = "Rejected";
         break;
       case GateStatus.forwarded:
-        c = Colors.blue;
+        c = kComplaintBlueLight;
         t = "Forwarded";
         break;
       default:
@@ -100,8 +182,6 @@ class _GateRequestsPageState extends State<GateRequestsPage> {
   }
 }
 
-/// ================= DETAILS PAGE =================
-
 class GateRequestDetailPage extends StatelessWidget {
   final GateRequest request;
   const GateRequestDetailPage({super.key, required this.request});
@@ -109,31 +189,35 @@ class GateRequestDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kComplaintBg,
       appBar: AppBar(
         title: const Text("Request Details"),
-        backgroundColor: const Color(0xFF3A6B52),
+        backgroundColor: kComplaintBlue,
+        foregroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(request.name,
-                style:
-                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text(
+              request.name,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 6),
             Text("Room: ${request.room}"),
             const SizedBox(height: 16),
             Text("Reason:\n${request.reason}"),
             const Spacer(),
-
             if (request.status == GateStatus.pending)
               Row(
                 children: [
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green),
+                        backgroundColor: kComplaintBlue,
+                        foregroundColor: Colors.white,
+                      ),
                       onPressed: () =>
                           _update(context, request, GateStatus.approved),
                       child: const Text("Approve"),
@@ -143,7 +227,9 @@ class GateRequestDetailPage extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red),
+                        backgroundColor: Colors.red,
+                        foregroundColor: Colors.white,
+                      ),
                       onPressed: () =>
                           _update(context, request, GateStatus.rejected),
                       child: const Text("Reject"),
@@ -155,6 +241,10 @@ class GateRequestDetailPage extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: kComplaintBlueLight,
+                    foregroundColor: Colors.white,
+                  ),
                   onPressed: () =>
                       _update(context, request, GateStatus.forwarded),
                   child: const Text("Forward to Higher Authority"),
@@ -167,7 +257,9 @@ class GateRequestDetailPage extends StatelessWidget {
                       ? "Rejected"
                       : "Forwarded",
                   style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold),
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
           ],
@@ -177,14 +269,13 @@ class GateRequestDetailPage extends StatelessWidget {
   }
 
   Future<void> _update(BuildContext c, GateRequest r, GateStatus s) async {
-  r.status = s;
+    r.status = s;
 
-  await NotificationService.send(
-    message: "Gate request of ${r.name} was ${s.name.toUpperCase()}",
-    type: "normal",
-  );
+    await NotificationService.send(
+      message: "Gate request of ${r.name} was ${s.name.toUpperCase()}",
+      type: "normal",
+    );
 
-  Navigator.pop(c);
-}
-
+    Navigator.pop(c);
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../core/complaint_theme.dart';
 
 class HostelSecComplaintsPage extends StatefulWidget {
   const HostelSecComplaintsPage({super.key});
@@ -27,11 +28,11 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
   Color _categoryColor(String category) {
     switch (category) {
       case 'Room Complaint':
-        return const Color(0xFF1565C0);
+        return kComplaintBlue;
       case 'Mess Complaint':
         return const Color(0xFFE65100);
       case 'General Complaint':
-        return const Color(0xFF2D6A4F);
+        return kComplaintBlue;
       default:
         return Colors.grey;
     }
@@ -114,7 +115,7 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
       builder: (context, child) => Theme(
         data: Theme.of(context).copyWith(
           colorScheme: const ColorScheme.light(
-            primary: Color(0xFF2D6A4F),
+            primary: kComplaintBlue,
             onPrimary: Colors.white,
             onSurface: Color(0xFF1B1B1B),
           ),
@@ -150,7 +151,7 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: const Row(
           children: [
-            Icon(Icons.forward_to_inbox, color: Color(0xFF6F42C1)),
+            Icon(Icons.forward_to_inbox, color: Color(0xFF1E88E5)),
             SizedBox(width: 8),
             Text(
               'Forward Complaint',
@@ -166,7 +167,7 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: const Color(0xFFF4F7F5),
+                color: kComplaintBg,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
@@ -199,15 +200,15 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: const Color(0xFFEDE7F6),
+                color: const Color(0xFFE8F0FE),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: const Color(0xFF6F42C1).withOpacity(0.3),
+                  color: const Color(0xFF1E88E5).withOpacity(0.3),
                 ),
               ),
               child: const Row(
                 children: [
-                  Icon(Icons.person, color: Color(0xFF6F42C1), size: 20),
+                  Icon(Icons.person, color: Color(0xFF1E88E5), size: 20),
                   SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,7 +217,7 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
                         'Forwarding To',
                         style: TextStyle(
                           fontSize: 11,
-                          color: Color(0xFF6F42C1),
+                          color: Color(0xFF1E88E5),
                         ),
                       ),
                       Text(
@@ -277,7 +278,7 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
                         ),
                       ],
                     ),
-                    backgroundColor: const Color(0xFF6F42C1),
+                    backgroundColor: const Color(0xFF1E88E5),
                     behavior: SnackBarBehavior.floating,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -298,7 +299,7 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
               style: TextStyle(fontWeight: FontWeight.w700),
             ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF6F42C1),
+              backgroundColor: const Color(0xFF1E88E5),
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -532,7 +533,10 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           value: _categoryFilter,
-          icon: const Icon(Icons.keyboard_arrow_down, color: Color(0xFF40916C)),
+          icon: const Icon(
+            Icons.keyboard_arrow_down,
+            color: kComplaintBlueLight,
+          ),
           style: const TextStyle(
             color: Color(0xFF1B1B1B),
             fontSize: 13,
@@ -550,7 +554,7 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F7F5),
+      backgroundColor: kComplaintBg,
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('complaints').snapshots(),
         builder: (context, snapshot) {
@@ -582,7 +586,7 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
               Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Color(0xFF2D6A4F), Color(0xFF40916C)],
+                    colors: [kComplaintBlue, kComplaintBlueLight],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -654,7 +658,7 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
                         _statBox(
                           'Forwarded',
                           forwarded,
-                          const Color(0xFF6F42C1).withOpacity(0.7),
+                          const Color(0xFF1E88E5).withOpacity(0.7),
                         ),
                         const SizedBox(width: 8),
                         _statBox(
@@ -695,7 +699,7 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
                           children: [
                             const Icon(
                               Icons.search,
-                              color: Color(0xFF40916C),
+                              color: kComplaintBlueLight,
                               size: 20,
                             ),
                             const SizedBox(width: 10),
@@ -733,12 +737,12 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
                                 decoration: BoxDecoration(
                                   color: _selectedDate == null
                                       ? Colors.white
-                                      : const Color(0xFFE8F5E9),
+                                      : kComplaintBlueTint,
                                   borderRadius: BorderRadius.circular(14),
                                   border: Border.all(
                                     color: _selectedDate == null
                                         ? Colors.transparent
-                                        : const Color(0xFF2D6A4F),
+                                        : kComplaintBlue,
                                     width: 1.5,
                                   ),
                                   boxShadow: [
@@ -753,7 +757,7 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
                                     const Icon(
                                       Icons.calendar_month,
                                       size: 18,
-                                      color: Color(0xFF2D6A4F),
+                                      color: kComplaintBlue,
                                     ),
                                     const SizedBox(width: 8),
                                     Expanded(
@@ -808,7 +812,7 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
                             vertical: 8,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFE8F5E9),
+                            color: kComplaintBlueTint,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Row(
@@ -816,7 +820,7 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
                               const Icon(
                                 Icons.filter_list,
                                 size: 14,
-                                color: Color(0xFF2D6A4F),
+                                color: kComplaintBlue,
                               ),
                               const SizedBox(width: 6),
                               Expanded(
@@ -824,7 +828,7 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
                                   'Showing complaints for: ${_formatFilterDate(_selectedDate!)}',
                                   style: const TextStyle(
                                     fontSize: 12,
-                                    color: Color(0xFF2D6A4F),
+                                    color: kComplaintBlue,
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
@@ -858,15 +862,13 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
                                   vertical: 7,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: active
-                                      ? const Color(0xFF2D6A4F)
-                                      : Colors.white,
+                                  color: active ? kComplaintBlue : Colors.white,
                                   borderRadius: BorderRadius.circular(20),
                                   boxShadow: [
                                     BoxShadow(
                                       color: active
                                           ? const Color(
-                                              0xFF2D6A4F,
+                                              0xFF1565C0,
                                             ).withOpacity(0.35)
                                           : Colors.black.withOpacity(0.07),
                                       blurRadius: active ? 10 : 6,
@@ -896,7 +898,7 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
                             snapshot.connectionState == ConnectionState.waiting
                             ? const Center(
                                 child: CircularProgressIndicator(
-                                  color: Color(0xFF2D6A4F),
+                                  color: kComplaintBlue,
                                 ),
                               )
                             : Builder(
@@ -1061,7 +1063,7 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
                                                                 )
                                                               : isForwarded
                                                               ? const Color(
-                                                                  0xFFEDE7F6,
+                                                                  0xFFE8F0FE,
                                                                 )
                                                               : const Color(
                                                                   0xFFFFF3CD,
@@ -1086,7 +1088,7 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
                                                                       )
                                                                     : isForwarded
                                                                     ? const Color(
-                                                                        0xFF6F42C1,
+                                                                        0xFF1E88E5,
                                                                       )
                                                                     : const Color(
                                                                         0xFFFFC107,
@@ -1220,7 +1222,7 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
                                                                   .forward_to_inbox,
                                                               size: 13,
                                                               color: Color(
-                                                                0xFF6F42C1,
+                                                                0xFF1E88E5,
                                                               ),
                                                             ),
                                                             const SizedBox(
@@ -1231,7 +1233,7 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
                                                               style: const TextStyle(
                                                                 fontSize: 12,
                                                                 color: Color(
-                                                                  0xFF6F42C1,
+                                                                  0xFF1E88E5,
                                                                 ),
                                                                 fontWeight:
                                                                     FontWeight
@@ -1275,10 +1277,10 @@ class _HostelSecComplaintsPageState extends State<HostelSecComplaintsPage> {
                                                     icon:
                                                         Icons.forward_to_inbox,
                                                     bgColor: const Color(
-                                                      0xFFEDE7F6,
+                                                      0xFFE8F0FE,
                                                     ),
                                                     textColor: const Color(
-                                                      0xFF6F42C1,
+                                                      0xFF1E88E5,
                                                     ),
                                                     done: actionDone,
                                                     isThis: isForwarded,

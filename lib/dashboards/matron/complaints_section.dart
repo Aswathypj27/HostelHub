@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../core/complaint_theme.dart';
 
 class ComplaintsSection extends StatefulWidget {
   const ComplaintsSection({super.key});
@@ -27,11 +28,11 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
   Color _categoryColor(String category) {
     switch (category) {
       case 'Room Complaint':
-        return const Color(0xFF1565C0);
+        return kComplaintBlue;
       case 'Mess Complaint':
         return const Color(0xFFE65100);
       case 'General Complaint':
-        return const Color(0xFF2D6A4F);
+        return kComplaintBlue;
       default:
         return Colors.grey;
     }
@@ -114,7 +115,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
       builder: (context, child) => Theme(
         data: Theme.of(context).copyWith(
           colorScheme: const ColorScheme.light(
-            primary: Color(0xFF2D6A4F),
+            primary: kComplaintBlue,
             onPrimary: Colors.white,
             onSurface: Color(0xFF1B1B1B),
           ),
@@ -157,7 +158,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           value: _categoryFilter,
-          icon: const Icon(Icons.keyboard_arrow_down, color: Color(0xFF40916C)),
+          icon: const Icon(Icons.keyboard_arrow_down, color: kComplaintBlueLight),
           style: const TextStyle(
             color: Color(0xFF1B1B1B),
             fontSize: 13,
@@ -179,7 +180,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: const Row(
           children: [
-            Icon(Icons.check_circle_outline, color: Color(0xFF2D6A4F)),
+            Icon(Icons.check_circle_outline, color: kComplaintBlue),
             SizedBox(width: 8),
             Text(
               'Accept & Forward',
@@ -195,7 +196,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: const Color(0xFFF4F7F5),
+                color: kComplaintBg,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
@@ -228,15 +229,15 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: const Color(0xFFE8F5E9),
+                color: kComplaintBlueTint,
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: const Color(0xFF2D6A4F).withOpacity(0.3),
+                  color: kComplaintBlue.withOpacity(0.3),
                 ),
               ),
               child: const Row(
                 children: [
-                  Icon(Icons.person, color: Color(0xFF2D6A4F), size: 20),
+                  Icon(Icons.person, color: kComplaintBlue, size: 20),
                   SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -245,7 +246,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
                         'Forwarding To',
                         style: TextStyle(
                           fontSize: 11,
-                          color: Color(0xFF2D6A4F),
+                          color: kComplaintBlue,
                         ),
                       ),
                       Text(
@@ -307,7 +308,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
                         ),
                       ],
                     ),
-                    backgroundColor: const Color(0xFF2D6A4F),
+                    backgroundColor: kComplaintBlue,
                     behavior: SnackBarBehavior.floating,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -328,7 +329,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
               style: TextStyle(fontWeight: FontWeight.w700),
             ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF2D6A4F),
+              backgroundColor: kComplaintBlue,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -552,7 +553,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F7F5),
+      backgroundColor: kComplaintBg,
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('complaints').snapshots(),
         builder: (context, snapshot) {
@@ -582,7 +583,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
               Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Color(0xFF2D6A4F), Color(0xFF40916C)],
+                    colors: [kComplaintBlue, kComplaintBlueLight],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -654,7 +655,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
                         _statBox(
                           'Accepted',
                           accepted,
-                          const Color(0xFF28A745).withOpacity(0.6),
+                          const Color(0xFF1565C0).withOpacity(0.6),
                         ),
                         const SizedBox(width: 8),
                         _statBox(
@@ -693,7 +694,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
                           children: [
                             const Icon(
                               Icons.search,
-                              color: Color(0xFF40916C),
+                              color: kComplaintBlueLight,
                               size: 20,
                             ),
                             const SizedBox(width: 10),
@@ -731,12 +732,12 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
                                 decoration: BoxDecoration(
                                   color: _selectedDate == null
                                       ? Colors.white
-                                      : const Color(0xFFE8F5E9),
+                                      : kComplaintBlueTint,
                                   borderRadius: BorderRadius.circular(14),
                                   border: Border.all(
                                     color: _selectedDate == null
                                         ? Colors.transparent
-                                        : const Color(0xFF2D6A4F),
+                                        : kComplaintBlue,
                                     width: 1.5,
                                   ),
                                   boxShadow: [
@@ -751,7 +752,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
                                     Icon(
                                       Icons.calendar_month,
                                       size: 18,
-                                      color: const Color(0xFF2D6A4F),
+                                      color: kComplaintBlue,
                                     ),
                                     const SizedBox(width: 8),
                                     Expanded(
@@ -821,14 +822,14 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
                                 ),
                                 decoration: BoxDecoration(
                                   color: active
-                                      ? const Color(0xFF2D6A4F)
+                                      ? kComplaintBlue
                                       : Colors.white,
                                   borderRadius: BorderRadius.circular(20),
                                   boxShadow: [
                                     BoxShadow(
                                       color: active
                                           ? const Color(
-                                              0xFF2D6A4F,
+                                              0xFF1565C0,
                                             ).withOpacity(0.35)
                                           : Colors.black.withOpacity(0.07),
                                       blurRadius: active ? 10 : 6,
@@ -861,7 +862,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
                             vertical: 8,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFE8F5E9),
+                            color: kComplaintBlueTint,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Row(
@@ -869,7 +870,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
                               const Icon(
                                 Icons.filter_list,
                                 size: 14,
-                                color: Color(0xFF2D6A4F),
+                                color: kComplaintBlue,
                               ),
                               const SizedBox(width: 6),
                               Expanded(
@@ -877,7 +878,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
                                   'Showing complaints for: ${_formatFilterDate(_selectedDate!)}',
                                   style: const TextStyle(
                                     fontSize: 12,
-                                    color: Color(0xFF2D6A4F),
+                                    color: kComplaintBlue,
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
@@ -892,7 +893,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
                             snapshot.connectionState == ConnectionState.waiting
                             ? const Center(
                                 child: CircularProgressIndicator(
-                                  color: Color(0xFF2D6A4F),
+                                  color: kComplaintBlue,
                                 ),
                               )
                             : () {
@@ -1051,7 +1052,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
                                                               )
                                                             : isAccepted
                                                             ? const Color(
-                                                                0xFFD4EDDA,
+                                                                0xFFE8F0FE,
                                                               )
                                                             : const Color(
                                                                 0xFFFFF3CD,
@@ -1075,7 +1076,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
                                                                     )
                                                                   : isAccepted
                                                                   ? const Color(
-                                                                      0xFF28A745,
+                                                                      0xFF1565C0,
                                                                     )
                                                                   : const Color(
                                                                       0xFFFFC107,
@@ -1128,7 +1129,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
                                                       ),
                                                   decoration: BoxDecoration(
                                                     color: const Color(
-                                                      0xFFEDE7F6,
+                                                      0xFFE8F0FE,
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -1143,7 +1144,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
                                                         Icons.forward_to_inbox,
                                                         size: 12,
                                                         color: Color(
-                                                          0xFF6F42C1,
+                                                          0xFF1E88E5,
                                                         ),
                                                       ),
                                                       SizedBox(width: 4),
@@ -1152,7 +1153,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
                                                         style: TextStyle(
                                                           fontSize: 11,
                                                           color: Color(
-                                                            0xFF6F42C1,
+                                                            0xFF1E88E5,
                                                           ),
                                                           fontWeight:
                                                               FontWeight.w700,
@@ -1216,7 +1217,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
                                                         Icons.forward_to_inbox,
                                                         size: 13,
                                                         color: Color(
-                                                          0xFF28A745,
+                                                          0xFF1565C0,
                                                         ),
                                                       ),
                                                       SizedBox(width: 4),
@@ -1225,7 +1226,7 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
                                                         style: TextStyle(
                                                           fontSize: 12,
                                                           color: Color(
-                                                            0xFF28A745,
+                                                            0xFF1565C0,
                                                           ),
                                                           fontWeight:
                                                               FontWeight.w700,
@@ -1263,10 +1264,10 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
                                                   icon: Icons
                                                       .check_circle_outline,
                                                   bgColor: const Color(
-                                                    0xFFD4EDDA,
+                                                    0xFFE8F0FE,
                                                   ),
                                                   textColor: const Color(
-                                                    0xFF28A745,
+                                                    0xFF1565C0,
                                                   ),
                                                   done: actionDone,
                                                   isThis: isAccepted,
@@ -1343,3 +1344,6 @@ class _ComplaintsSectionState extends State<ComplaintsSection> {
     );
   }
 }
+
+
+

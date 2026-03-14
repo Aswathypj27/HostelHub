@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../core/complaint_theme.dart';
+
 class RequestListPage extends StatefulWidget {
   const RequestListPage({super.key});
 
@@ -8,8 +10,7 @@ class RequestListPage extends StatefulWidget {
 }
 
 class _RequestListPageState extends State<RequestListPage> {
-  // dummy data for now
-  List<Map<String, String>> requests = [
+  final List<Map<String, String>> requests = [
     {
       "student": "Akhil",
       "room": "203",
@@ -25,41 +26,137 @@ class _RequestListPageState extends State<RequestListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Requests")),
-      body: requests.isEmpty
-          ? const Center(child: Text("No pending requests"))
-          : ListView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: requests.length,
-              itemBuilder: (context, index) {
-                final r = requests[index];
-                return Card(
-                  child: ListTile(
-                    title: Text("${r["student"]} • Room ${r["room"]}"),
-                    subtitle: Text(r["reason"]!),
-                    trailing: PopupMenuButton<String>(
-                      onSelected: (value) {
-                        if (value == "approve") {
-                          _confirmApprove(index);
-                        } else {
-                          _confirmReject(index);
-                        }
-                      },
-                      itemBuilder: (_) => const [
-                        PopupMenuItem(
-                          value: "approve",
-                          child: Text("Approve"),
+      backgroundColor: kComplaintBg,
+      body: Column(
+        children: [
+          _header(context),
+          Expanded(
+            child: requests.isEmpty
+                ? const Center(child: Text("No pending requests"))
+                : ListView.builder(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: requests.length,
+                    itemBuilder: (context, index) {
+                      final r = requests[index];
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 12),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: kComplaintBorder, width: 1.2),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Color(0x141565C0),
+                              blurRadius: 10,
+                              offset: Offset(0, 3),
+                            ),
+                          ],
                         ),
-                        PopupMenuItem(
-                          value: "reject",
-                          child: Text("Reject"),
+                        child: ListTile(
+                          leading: Container(
+                            width: 42,
+                            height: 42,
+                            decoration: BoxDecoration(
+                              color: kComplaintBlueTint,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Icon(
+                              Icons.outgoing_mail,
+                              color: kComplaintBlue,
+                            ),
+                          ),
+                          title: Text(
+                            "${r["student"]} - Room ${r["room"]}",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w700,
+                              color: kComplaintText,
+                            ),
+                          ),
+                          subtitle: Text(
+                            r["reason"]!,
+                            style: const TextStyle(color: kComplaintMuted),
+                          ),
+                          trailing: PopupMenuButton<String>(
+                            onSelected: (value) {
+                              if (value == "approve") {
+                                _confirmApprove(index);
+                              } else {
+                                _confirmReject(index);
+                              }
+                            },
+                            itemBuilder: (_) => const [
+                              PopupMenuItem(
+                                value: "approve",
+                                child: Text("Approve"),
+                              ),
+                              PopupMenuItem(
+                                value: "reject",
+                                child: Text("Reject"),
+                              ),
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
-                );
-              },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _header(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(20, 18, 20, 22),
+      decoration: const BoxDecoration(
+        gradient: kComplaintHeaderGradient,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(28),
+          bottomRight: Radius.circular(28),
+        ),
+      ),
+      child: SafeArea(
+        bottom: false,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.18),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Icon(
+                  Icons.arrow_back_rounded,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              ),
             ),
+            const SizedBox(height: 16),
+            const Text(
+              "Requests",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              "${requests.length} pending request(s)",
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.75),
+                fontSize: 13,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -75,6 +172,10 @@ class _RequestListPageState extends State<RequestListPage> {
             child: const Text("Cancel"),
           ),
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: kComplaintBlue,
+              foregroundColor: Colors.white,
+            ),
             onPressed: () {
               setState(() => requests.removeAt(index));
               Navigator.pop(context);
@@ -106,6 +207,10 @@ class _RequestListPageState extends State<RequestListPage> {
             child: const Text("Cancel"),
           ),
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.redAccent,
+              foregroundColor: Colors.white,
+            ),
             onPressed: () {
               setState(() => requests.removeAt(index));
               Navigator.pop(context);

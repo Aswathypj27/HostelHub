@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../core/complaint_theme.dart';
 import 'request_list_page.dart';
 
 class RequestComplaintPage extends StatelessWidget {
@@ -91,11 +92,11 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
   Color _categoryColor(String category) {
     switch (category) {
       case 'Room Complaint':
-        return const Color(0xFF1565C0);
+        return kComplaintBlue;
       case 'Mess Complaint':
         return const Color(0xFFE65100);
       case 'General Complaint':
-        return const Color(0xFF2D6A4F);
+        return kComplaintBlue;
       case 'Private Complaint':
         return Colors.purple;
       default:
@@ -215,7 +216,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
       builder: (context, child) => Theme(
         data: Theme.of(context).copyWith(
           colorScheme: const ColorScheme.light(
-            primary: Color(0xFF2D6A4F),
+            primary: kComplaintBlue,
             onPrimary: Colors.white,
             onSurface: Color(0xFF1B1B1B),
           ),
@@ -262,7 +263,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           value: _categoryFilter,
-          icon: const Icon(Icons.keyboard_arrow_down, color: Color(0xFF40916C)),
+          icon: const Icon(Icons.keyboard_arrow_down, color: kComplaintBlueLight),
           style: const TextStyle(
             color: Color(0xFF1B1B1B),
             fontSize: 13,
@@ -365,7 +366,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: const Row(
           children: [
-            Icon(Icons.thumb_up_alt_outlined, color: Color(0xFF1565C0)),
+            Icon(Icons.thumb_up_alt_outlined, color: kComplaintBlue),
             SizedBox(width: 8),
             Text(
               'Accept Complaint',
@@ -405,7 +406,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: const BorderSide(
-                    color: Color(0xFF1565C0),
+                    color: kComplaintBlue,
                     width: 2,
                   ),
                 ),
@@ -450,7 +451,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                     });
                 _snack(
                   'Complaint accepted — student notified',
-                  const Color(0xFF1565C0),
+                  kComplaintBlue,
                   Icons.thumb_up,
                 );
               } catch (e) {
@@ -463,7 +464,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
               style: TextStyle(fontWeight: FontWeight.w700),
             ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF1565C0),
+              backgroundColor: kComplaintBlue,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -482,7 +483,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: const Row(
           children: [
-            Icon(Icons.check_circle_outline, color: Color(0xFF2D6A4F)),
+            Icon(Icons.check_circle_outline, color: kComplaintBlue),
             SizedBox(width: 8),
             Text(
               'Resolve Complaint',
@@ -494,22 +495,22 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _complaintPreview(data, const Color(0xFFF4F7F5)),
+            _complaintPreview(data, kComplaintBg),
             const SizedBox(height: 10),
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: const Color(0xFFE8F5E9),
+                color: kComplaintBlueTint,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: const Row(
                 children: [
-                  Icon(Icons.info_outline, size: 14, color: Color(0xFF2D6A4F)),
+                  Icon(Icons.info_outline, size: 14, color: kComplaintBlue),
                   SizedBox(width: 6),
                   Expanded(
                     child: Text(
                       'Press this only after the issue has been physically fixed.',
-                      style: TextStyle(fontSize: 12, color: Color(0xFF2D6A4F)),
+                      style: TextStyle(fontSize: 12, color: kComplaintBlue),
                     ),
                   ),
                 ],
@@ -548,7 +549,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                     });
                 _snack(
                   'Complaint marked as resolved',
-                  const Color(0xFF2D6A4F),
+                  kComplaintBlue,
                   Icons.check_circle,
                 );
               } catch (e) {
@@ -561,7 +562,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
               style: TextStyle(fontWeight: FontWeight.w700),
             ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF2D6A4F),
+              backgroundColor: kComplaintBlue,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -691,7 +692,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: const Row(
           children: [
-            Icon(Icons.forward_to_inbox, color: Color(0xFF1565C0)),
+            Icon(Icons.forward_to_inbox, color: kComplaintBlue),
             SizedBox(width: 8),
             Text(
               'Forward to Office Admin',
@@ -699,7 +700,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
             ),
           ],
         ),
-        content: _complaintPreview(data, const Color(0xFFF4F7F5)),
+        content: _complaintPreview(data, kComplaintBg),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
@@ -737,7 +738,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                     });
                 _snack(
                   'Forwarded to Office Admin',
-                  const Color(0xFF1565C0),
+                  kComplaintBlue,
                   Icons.check_circle,
                 );
               } catch (e) {
@@ -750,7 +751,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
               style: TextStyle(fontWeight: FontWeight.w700),
             ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF1565C0),
+              backgroundColor: kComplaintBlue,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -788,7 +789,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F7F5),
+      backgroundColor: kComplaintBg,
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('complaints').snapshots(),
         builder: (context, snapshot) {
@@ -827,7 +828,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
               Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Color(0xFF2D6A4F), Color(0xFF40916C)],
+                    colors: [kComplaintBlue, kComplaintBlueLight],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -901,13 +902,13 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                           _statBox(
                             'Accepted',
                             accepted,
-                            const Color(0xFF1565C0).withOpacity(0.7),
+                            kComplaintBlue.withOpacity(0.7),
                           ),
                           const SizedBox(width: 6),
                           _statBox(
                             'Resolved',
                             resolved,
-                            const Color(0xFF28A745).withOpacity(0.6),
+                            const Color(0xFF1565C0).withOpacity(0.6),
                           ),
                           const SizedBox(width: 6),
                           _statBox(
@@ -955,7 +956,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                           children: [
                             const Icon(
                               Icons.search,
-                              color: Color(0xFF40916C),
+                              color: kComplaintBlueLight,
                               size: 20,
                             ),
                             const SizedBox(width: 10),
@@ -993,12 +994,12 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                                 decoration: BoxDecoration(
                                   color: _selectedDate == null
                                       ? Colors.white
-                                      : const Color(0xFFE8F5E9),
+                                      : kComplaintBlueTint,
                                   borderRadius: BorderRadius.circular(14),
                                   border: Border.all(
                                     color: _selectedDate == null
                                         ? Colors.transparent
-                                        : const Color(0xFF2D6A4F),
+                                        : kComplaintBlue,
                                     width: 1.5,
                                   ),
                                   boxShadow: [
@@ -1013,7 +1014,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                                     const Icon(
                                       Icons.calendar_month,
                                       size: 18,
-                                      color: Color(0xFF2D6A4F),
+                                      color: kComplaintBlue,
                                     ),
                                     const SizedBox(width: 8),
                                     Expanded(
@@ -1083,14 +1084,14 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                                 ),
                                 decoration: BoxDecoration(
                                   color: active
-                                      ? const Color(0xFF2D6A4F)
+                                      ? kComplaintBlue
                                       : Colors.white,
                                   borderRadius: BorderRadius.circular(20),
                                   boxShadow: [
                                     BoxShadow(
                                       color: active
                                           ? const Color(
-                                              0xFF2D6A4F,
+                                              0xFF1565C0,
                                             ).withOpacity(0.35)
                                           : Colors.black.withOpacity(0.07),
                                       blurRadius: active ? 10 : 6,
@@ -1124,7 +1125,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                             vertical: 8,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFE8F5E9),
+                            color: kComplaintBlueTint,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Row(
@@ -1132,7 +1133,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                               const Icon(
                                 Icons.filter_list,
                                 size: 14,
-                                color: Color(0xFF2D6A4F),
+                                color: kComplaintBlue,
                               ),
                               const SizedBox(width: 6),
                               Expanded(
@@ -1140,7 +1141,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                                   'Showing complaints for: ${_formatFilterDate(_selectedDate!)}',
                                   style: const TextStyle(
                                     fontSize: 12,
-                                    color: Color(0xFF2D6A4F),
+                                    color: kComplaintBlue,
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
@@ -1155,7 +1156,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                             snapshot.connectionState == ConnectionState.waiting
                             ? const Center(
                                 child: CircularProgressIndicator(
-                                  color: Color(0xFF2D6A4F),
+                                  color: kComplaintBlue,
                                 ),
                               )
                             : Builder(
@@ -1326,7 +1327,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                                                                 )
                                                               : isResolved
                                                               ? const Color(
-                                                                  0xFFD4EDDA,
+                                                                  0xFFE8F0FE,
                                                                 )
                                                               : isAccepted
                                                               ? const Color(
@@ -1334,7 +1335,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                                                                 )
                                                               : isForwarded
                                                               ? const Color(
-                                                                  0xFFEDE7F6,
+                                                                  0xFFE8F0FE,
                                                                 )
                                                               : const Color(
                                                                   0xFFFFF3CD,
@@ -1359,7 +1360,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                                                                       )
                                                                     : isResolved
                                                                     ? const Color(
-                                                                        0xFF28A745,
+                                                                        0xFF1565C0,
                                                                       )
                                                                     : isAccepted
                                                                     ? const Color(
@@ -1482,7 +1483,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                                                           ),
                                                       decoration: BoxDecoration(
                                                         color: const Color(
-                                                          0xFFE8F5E9,
+                                                          0xFFE8F0FE,
                                                         ),
                                                         borderRadius:
                                                             BorderRadius.circular(
@@ -1498,7 +1499,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                                                                 .forward_to_inbox,
                                                             size: 12,
                                                             color: Color(
-                                                              0xFF2D6A4F,
+                                                              0xFF1565C0,
                                                             ),
                                                           ),
                                                           SizedBox(width: 4),
@@ -1507,7 +1508,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                                                             style: TextStyle(
                                                               fontSize: 11,
                                                               color: Color(
-                                                                0xFF2D6A4F,
+                                                                0xFF1565C0,
                                                               ),
                                                               fontWeight:
                                                                   FontWeight
@@ -1621,7 +1622,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                                                           Icons.check_circle,
                                                           size: 13,
                                                           color: Color(
-                                                            0xFF28A745,
+                                                            0xFF1565C0,
                                                           ),
                                                         ),
                                                         SizedBox(width: 4),
@@ -1630,7 +1631,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                                                           style: TextStyle(
                                                             fontSize: 12,
                                                             color: Color(
-                                                              0xFF28A745,
+                                                              0xFF1565C0,
                                                             ),
                                                             fontWeight:
                                                                 FontWeight.w700,
@@ -1823,11 +1824,11 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                                                           icon: Icons
                                                               .check_circle_outline,
                                                           bgColor: const Color(
-                                                            0xFFD4EDDA,
+                                                            0xFFE8F0FE,
                                                           ),
                                                           textColor:
                                                               const Color(
-                                                                0xFF28A745,
+                                                                0xFF1565C0,
                                                               ),
                                                           done: false,
                                                           isThis: false,
@@ -1871,7 +1872,7 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
                                                           icon: Icons
                                                               .check_circle,
                                                           bgColor: const Color(
-                                                            0xFF28A745,
+                                                            0xFF1565C0,
                                                           ),
                                                           textColor:
                                                               Colors.white,
@@ -1967,3 +1968,6 @@ class _WardenComplaintListPageState extends State<WardenComplaintListPage> {
     );
   }
 }
+
+
+

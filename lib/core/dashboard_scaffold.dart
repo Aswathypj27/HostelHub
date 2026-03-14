@@ -23,7 +23,7 @@ class DashboardScaffold extends StatelessWidget {
     final String? userId = Session.userId;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF5F8FF),
       body: Column(
         children: [
           // ================= HEADER =================
@@ -31,7 +31,11 @@ class DashboardScaffold extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.fromLTRB(20, 18, 20, 18),
             decoration: const BoxDecoration(
-              color: Color(0xFF3A6B52),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Color(0xFF1565C0), Color(0xFF1E88E5)],
+              ),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(26),
                 bottomRight: Radius.circular(26),
@@ -54,7 +58,7 @@ class DashboardScaffold extends StatelessWidget {
                             child: Icon(
                               Icons.apartment,
                               size: 18,
-                              color: Color(0xFF3A6B52),
+                              color: Color(0xFF1565C0),
                             ),
                           ),
                           SizedBox(width: 8),
@@ -151,7 +155,7 @@ class DashboardScaffold extends StatelessWidget {
                               child: Icon(
                                 Icons.person,
                                 size: 18,
-                                color: Color(0xFF3A6B52),
+                                color: Color(0xFF1565C0),
                               ),
                             ),
                           ),

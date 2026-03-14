@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../office_admin/office_dashboard.dart';
+import '../dashboards/mess/mess_sec/mess_sec_screen.dart';
 import '../dashboards/warden_dashboard.dart';
 import '../dashboards/rt_dashboard.dart';
 import '../dashboards/wingsec/wingsec_attendance.dart';
@@ -135,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
           throw "Invalid password";
         }
 
-        final role = data['role'];
+        final role = (data['role'] ?? '').toString().toLowerCase();
 
         Session.userId = userId;
         Session.role = role;
@@ -154,6 +155,8 @@ class _LoginScreenState extends State<LoginScreen> {
           page = const MatronDashboard();
         } else if (role == 'security') {
           page = const SecurityDashboard();
+        } else if (role == 'messsec' || role == 'mess_sec') {
+          page = const MessSecScreen();
         } else {
           throw "Unauthorized role";
         }
